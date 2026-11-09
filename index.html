@@ -1,1 +1,1050 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090817">
+<title>A Little Wish For You</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #090817;
+  --purple: #b99aff;
+  --pink: #f0b7d7;
+  --white: #fff9ff;
+  --muted: #c4b8d6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+#universe {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#stars {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(109, 65, 173, .18), transparent 45%),
+    radial-gradient(ellipse at 80% 75%, rgba(190, 91, 160, .12), transparent 45%),
+    linear-gradient(145deg, #090817, #100c25 55%, #090817);
+}
+
+.glow {
+  position: fixed;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .16;
+  pointer-events: none;
+  animation: glowMove 12s ease-in-out infinite alternate;
+}
+
+.glow.one {
+  background: #9b65ff;
+  top: 5%;
+  left: -100px;
+}
+
+.glow.two {
+  background: #ed83c4;
+  right: -100px;
+  bottom: 5%;
+  animation-delay: -5s;
+}
+
+@keyframes glowMove {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(50px, 35px) scale(1.2); }
+}
+
+/* SCREEN LAYOUT */
+
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  align-items: center;
+  padding: 28px 22px 90px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition:
+    opacity 1s ease,
+    transform 1s ease,
+    visibility 1s;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior-y: contain;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.screen-content {
+  width: 100%;
+  max-width: 520px;
+  flex-shrink: 0;
+  margin: auto 0;
+}
+
+/* TEXT */
+
+.eyebrow {
+  color: var(--purple);
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  opacity: .9;
+}
+
+h1, h2, .serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+}
+
+.main-title {
+  font-size: clamp(43px, 10vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -.8px;
+  margin-bottom: 22px;
+  background: linear-gradient(120deg, #fff, #d9c1ff 50%, #f6c6df);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.intro-text {
+  max-width: 350px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+/* BUTTONS */
+
+.primary-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 38px;
+  padding: 15px 30px;
+  border: 1px solid rgba(205, 174, 255, .55);
+  border-radius: 50px;
+  background: linear-gradient(120deg, rgba(147, 103, 208, .25), rgba(217, 142, 190, .17));
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  transition: .3s ease;
+  box-shadow: 0 0 25px rgba(171, 121, 255, .12);
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  background: rgba(169, 124, 225, .3);
+  box-shadow: 0 0 35px rgba(171, 121, 255, .25);
+}
+
+.primary-btn:active {
+  transform: scale(.97);
+}
+
+.small-note {
+  margin-top: 25px;
+  color: rgba(220, 207, 235, .5);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+/* CRESCENT MOON */
+
+.moon-art {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 25px;
+  display: grid;
+  place-items: center;
+  animation: moonFloat 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px rgba(200, 157, 255, .35));
+}
+
+@keyframes moonFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* ENVELOPE */
+
+.envelope-wrap {
+  width: 230px;
+  height: 165px;
+  position: relative;
+  margin: 55px auto 35px;
+  perspective: 900px;
+  cursor: pointer;
+}
+
+.envelope {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #bda0db;
+  border-radius: 5px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, .3);
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #d5bce9;
+  border-radius: 5px;
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #b99bd5, #8c70b5);
+  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 5px;
+  z-index: 3;
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #e4c9ed, #b89bd8);
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: top center;
+  transition: transform .9s ease;
+  z-index: 4;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-letter {
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  left: 7.5%;
+  top: 7%;
+  background: #fff9f4;
+  border-radius: 4px;
+  z-index: 2;
+  transition: transform 1s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9474ac;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 23px;
+}
+
+.envelope.open .envelope-letter {
+  transform: translateY(-95px);
+}
+
+.envelope-hint {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: .55; }
+  50% { opacity: 1; }
+}
+
+/* LETTER */
+
+.letter-content {
+  width: 100%;
+  max-width: 540px;
+  flex-shrink: 0;
+  padding: 36px 27px;
+  border: 1px solid rgba(206, 175, 245, .2);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(37, 26, 58, .78), rgba(20, 16, 37, .88));
+  box-shadow: 0 20px 70px rgba(0, 0, 0, .2);
+  text-align: left;
+  position: relative;
+}
+
+.letter-content::before {
+  content: "✦";
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: rgba(221, 185, 255, .6);
+  font-size: 20px;
+}
+
+.letter-topline {
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--purple);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.letter-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 500;
+  color: #f8eaff;
+  margin-bottom: 22px;
+}
+
+#typedMessage {
+  color: #e1d5eb;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 2;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  min-height: 100px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  height: 15px;
+  background: var(--pink);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink .8s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.signature {
+  margin-top: 27px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(206, 175, 245, .18);
+  color: #d7baf1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.signature.show {
+  opacity: 1;
+}
+
+#continueBtn {
+  display: none;
+  margin-top: 25px;
+}
+
+/* FINAL SCREEN */
+
+.final-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(45px, 10vw, 70px);
+  line-height: 1.05;
+  background: linear-gradient(120deg, #fff, #d9baff, #f4c3df);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 22px;
+}
+
+.final-message {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 2;
+  max-width: 360px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+.heart {
+  font-size: 29px;
+  margin: 25px 0 5px;
+  display: inline-block;
+  animation: heartbeat 1.8s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.18); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.12); }
+}
+
+.footer-note {
+  position: relative;
+  margin-top: 45px;
+  color: rgba(218, 200, 235, .42);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.final-signature {
+  margin-top: 12px;
+  color: rgba(226, 206, 245, .65);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+/* FIREWORKS */
+
+#fireworks {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#fireworks.active {
+  opacity: 1;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+  .letter-content {
+    padding: 32px 23px;
+  }
+
+  .envelope-wrap {
+    width: 210px;
+    height: 150px;
+  }
+
+  .intro-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-height: 650px) {
+  .screen {
+    padding: 15px 15px 75px;
+  }
+
+  .moon-art {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 15px;
+  }
+
+  .envelope-wrap {
+    margin: 35px auto 25px;
+  }
+
+  .letter-content {
+    padding: 25px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="ambient"></div>
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<div id="universe">
+  <canvas id="stars"></canvas>
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<!-- INTRO SCREEN -->
+
+<section class="screen active" id="intro">
+  <div class="screen-content">
+
+    <div class="moon-art">
+      <svg viewBox="0 0 100 100" width="85" height="85">
+        <defs>
+          <filter id="moonGlow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        <path
+          d="M65 12
+             A38 38 0 1 0 88 72
+             A31 31 0 0 1 65 12Z"
+          fill="#f4e5ff"
+          filter="url(#moonGlow)"
+        />
+
+        <circle cx="17" cy="23" r="2" fill="#e9d5ff"/>
+        <circle cx="84" cy="19" r="1.8" fill="#f5d8eb"/>
+        <circle cx="88" cy="48" r="1.3" fill="#e9d5ff"/>
+
+        <path
+          d="M18 65 L21 71 L27 74 L21 77 L18 83 L15 77 L9 74 L15 71Z"
+          fill="#f5d8eb"
+        />
+      </svg>
+    </div>
+
+    <p class="eyebrow">A little something for you</p>
+
+    <h1 class="main-title">Hey, Suhani!</h1>
+
+    <p class="intro-text">
+      Some people make ordinary days a little more special.
+      This little surprise is for one of them. 💜
+    </p>
+
+    <button class="primary-btn" onclick="goToEnvelope()">
+      Open Your Surprise <span>✦</span>
+    </button>
+
+    <p class="small-note">MADE WITH A LITTLE EXTRA THOUGHT</p>
+
+  </div>
+</section>
+
+<!-- ENVELOPE SCREEN -->
+
+<section class="screen" id="envelopeScreen">
+  <div class="screen-content">
+
+    <p class="eyebrow">A message for you</p>
+
+    <h2 class="main-title" style="font-size:42px;">
+      A little wish,
+      <br>just for you
+    </h2>
+
+    <div class="envelope-wrap" onclick="openEnvelope()">
+      <div class="envelope" id="envelope">
+
+        <div class="envelope-back"></div>
+
+        <div class="envelope-letter">For You ✨</div>
+
+        <div class="envelope-flap"></div>
+
+        <div class="envelope-front"></div>
+
+      </div>
+    </div>
+
+    <p class="envelope-hint" id="envelopeHint">
+      Some wishes are better when they're opened.
+    </p>
+
+  </div>
+</section>
+
+<!-- LETTER SCREEN -->
+
+<section class="screen" id="letterScreen">
+  <div class="letter-content">
+
+    <p class="letter-topline">A New Year Wish</p>
+
+    <h2 class="letter-heading">Dear Suhani,</h2>
+
+    <div id="typedMessage"></div>
+
+    <span class="cursor" id="cursor"></span>
+
+    <div class="signature" id="signature">
+      With warm wishes,
+      <br>Parth ✨
+    </div>
+
+    <button
+      class="primary-btn"
+      id="continueBtn"
+      onclick="continueToFinal()"
+    >
+      Continue ✦
+    </button>
+
+  </div>
+</section>
+
+<!-- FINAL SCREEN -->
+
+<section class="screen" id="finalScreen">
+  <div class="screen-content">
+
+    <p class="eyebrow">A new beginning</p>
+
+    <h1 class="final-title">Happy New Year!</h1>
+
+    <p class="final-message">
+      May this year bring brighter days, beautiful opportunities
+      and countless reasons to smile.
+    </p>
+
+    <div class="heart">💜</div>
+
+    <p class="final-message">
+      Wishing you a wonderful year ahead, Suhani!
+    </p>
+
+    <button class="primary-btn" onclick="restartExperience()">
+      ↻ &nbsp; Experience Again
+    </button>
+
+    <p class="footer-note">
+      A LITTLE EXPERIENCE CREATED BY PARTH.DEV
+    </p>
+
+    <p class="final-signature">— Parth S. Talpada</p>
+
+  </div>
+</section>
+
+<script>
+
+/* ---------------------------------
+   SCREEN NAVIGATION
+---------------------------------- */
+
+const screens = document.querySelectorAll(".screen");
+
+function showScreen(id) {
+  screens.forEach(screen => {
+    screen.classList.remove("active");
+    screen.scrollTop = 0;
+  });
+
+  document.getElementById(id).classList.add("active");
+}
+
+function goToEnvelope() {
+  showScreen("envelopeScreen");
+}
+
+/* ---------------------------------
+   ENVELOPE ANIMATION
+---------------------------------- */
+
+let envelopeOpened = false;
+
+function openEnvelope() {
+  if (envelopeOpened) return;
+
+  envelopeOpened = true;
+
+  document.getElementById("envelope").classList.add("open");
+
+  document.getElementById("envelopeHint").textContent =
+    "A little message is waiting for you...";
+
+  setTimeout(() => {
+    showScreen("letterScreen");
+    startTyping();
+  }, 1400);
+}
+
+/* ---------------------------------
+   TYPEWRITER MESSAGE
+---------------------------------- */
+
+const message = `As this new year begins, I just wanted to send a little wish your way.
+
+I'm glad our paths crossed, and I hope this year brings you plenty of happiness, exciting opportunities and beautiful experiences.
+
+May it bring new beginnings, unexpected reasons to smile and moments worth remembering.
+
+And hopefully, along the way, we'll get to share more conversations, random thoughts and a few memorable moments too.
+
+Whatever this year brings, I genuinely hope it treats you well. Keep smiling, keep growing and always stay the way you are.
+
+Wishing you a wonderful year ahead! 💜`;
+
+let typingTimer = null;
+let typingIndex = 0;
+
+function startTyping() {
+  const output = document.getElementById("typedMessage");
+  const cursor = document.getElementById("cursor");
+  const signature = document.getElementById("signature");
+  const continueBtn = document.getElementById("continueBtn");
+
+  output.textContent = "";
+  signature.classList.remove("show");
+  continueBtn.style.display = "none";
+
+  cursor.style.display = "inline-block";
+
+  typingIndex = 0;
+
+  clearTimeout(typingTimer);
+
+  function typeCharacter() {
+
+    if (typingIndex < message.length) {
+
+      output.textContent += message.charAt(typingIndex);
+      typingIndex++;
+
+      typingTimer = setTimeout(typeCharacter, 30);
+
+    } else {
+
+      cursor.style.display = "none";
+      signature.classList.add("show");
+
+      // Show Continue only after the complete message is typed.
+      continueBtn.style.display = "inline-flex";
+
+    }
+  }
+
+  typeCharacter();
+}
+
+/* ---------------------------------
+   CONTINUE TO FINAL SCREEN
+---------------------------------- */
+
+function continueToFinal() {
+  clearTimeout(typingTimer);
+  showScreen("finalScreen");
+  startFireworks();
+}
+
+/* ---------------------------------
+   RESTART EXPERIENCE
+---------------------------------- */
+
+function restartExperience() {
+
+  clearTimeout(typingTimer);
+
+  stopFireworks();
+
+  envelopeOpened = false;
+
+  document.getElementById("envelope").classList.remove("open");
+
+  document.getElementById("envelopeHint").textContent =
+    "Some wishes are better when they're opened.";
+
+  document.getElementById("typedMessage").textContent = "";
+
+  document.getElementById("signature").classList.remove("show");
+
+  document.getElementById("cursor").style.display = "inline-block";
+
+  document.getElementById("continueBtn").style.display = "none";
+
+  showScreen("intro");
+}
+
+/* ---------------------------------
+   STARFIELD ANIMATION
+---------------------------------- */
+
+const starCanvas = document.getElementById("stars");
+const starCtx = starCanvas.getContext("2d");
+
+let stars = [];
+let starWidth = 0;
+let starHeight = 0;
+
+function resizeStars() {
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  starWidth = window.innerWidth;
+  starHeight = window.innerHeight;
+
+  starCanvas.width = starWidth * dpr;
+  starCanvas.height = starHeight * dpr;
+
+  starCanvas.style.width = starWidth + "px";
+  starCanvas.style.height = starHeight + "px";
+
+  starCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  stars = [];
+
+  const totalStars = Math.min(
+    150,
+    Math.floor((starWidth * starHeight) / 5500)
+  );
+
+  for (let i = 0; i < totalStars; i++) {
+
+    stars.push({
+      x: Math.random() * starWidth,
+      y: Math.random() * starHeight,
+      radius: Math.random() * 1.4 + .2,
+      alpha: Math.random() * .7 + .2,
+      speed: Math.random() * .008 + .002,
+      phase: Math.random() * Math.PI * 2
+    });
+
+  }
+}
+
+function animateStars(time) {
+
+  starCtx.clearRect(0, 0, starWidth, starHeight);
+
+  stars.forEach(star => {
+
+    const flicker =
+      star.alpha + Math.sin(time * star.speed + star.phase) * .2;
+
+    starCtx.beginPath();
+
+    starCtx.arc(
+      star.x,
+      star.y,
+      star.radius,
+      0,
+      Math.PI * 2
+    );
+
+    starCtx.fillStyle =
+      `rgba(239, 222, 255, ${Math.max(.1, flicker)})`;
+
+    starCtx.fill();
+
+  });
+
+  requestAnimationFrame(animateStars);
+}
+
+window.addEventListener("resize", resizeStars);
+
+resizeStars();
+
+requestAnimationFrame(animateStars);
+
+/* ---------------------------------
+   FIREWORKS ANIMATION
+---------------------------------- */
+
+const fireworkCanvas = document.getElementById("fireworks");
+const fireworkCtx = fireworkCanvas.getContext("2d");
+
+let particles = [];
+let fireworksRunning = false;
+let fireworksAnimationId = null;
+let lastFireworkTime = 0;
+
+function resizeFireworks() {
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  fireworkCanvas.width = window.innerWidth * dpr;
+  fireworkCanvas.height = window.innerHeight * dpr;
+
+  fireworkCanvas.style.width = window.innerWidth + "px";
+  fireworkCanvas.style.height = window.innerHeight + "px";
+
+  fireworkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resizeFireworks);
+
+resizeFireworks();
+
+function createFirework(x, y) {
+
+  const colors = [
+    "#d9b5ff",
+    "#f5c5e4",
+    "#fff0c9",
+    "#b9d8ff",
+    "#e9aaff"
+  ];
+
+  const color = colors[
+    Math.floor(Math.random() * colors.length)
+  ];
+
+  const count = 45 + Math.floor(Math.random() * 25);
+
+  for (let i = 0; i < count; i++) {
+
+    const angle = (Math.PI * 2 * i) / count;
+    const speed = Math.random() * 3.5 + 1.2;
+
+    particles.push({
+      x,
+      y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      alpha: 1,
+      decay: Math.random() * .012 + .008,
+      size: Math.random() * 2 + 1,
+      color
+    });
+
+  }
+}
+
+function animateFireworks(timestamp) {
+
+  if (!fireworksRunning) return;
+
+  fireworkCtx.clearRect(
+    0,
+    0,
+    window.innerWidth,
+    window.innerHeight
+  );
+
+  if (timestamp - lastFireworkTime > 1000) {
+
+    createFirework(
+      Math.random() * window.innerWidth,
+      Math.random() * window.innerHeight * .55
+    );
+
+    lastFireworkTime = timestamp;
+  }
+
+  particles.forEach((particle, index) => {
+
+    particle.x += particle.vx;
+    particle.y += particle.vy;
+    particle.vy += .025;
+    particle.alpha -= particle.decay;
+
+    fireworkCtx.globalAlpha = Math.max(0, particle.alpha);
+    fireworkCtx.fillStyle = particle.color;
+
+    fireworkCtx.beginPath();
+
+    fireworkCtx.arc(
+      particle.x,
+      particle.y,
+      particle.size,
+      0,
+      Math.PI * 2
+    );
+
+    fireworkCtx.fill();
+
+    if (particle.alpha <= 0) {
+      particles.splice(index, 1);
+    }
+
+  });
+
+  fireworkCtx.globalAlpha = 1;
+
+  fireworksAnimationId = requestAnimationFrame(animateFireworks);
+}
+
+function startFireworks() {
+
+  stopFireworks();
+
+  fireworksRunning = true;
+  lastFireworkTime = 0;
+
+  fireworkCanvas.classList.add("active");
+
+  createFirework(
+    window.innerWidth * .5,
+    window.innerHeight * .3
+  );
+
+  fireworksAnimationId = requestAnimationFrame(animateFireworks);
+}
+
+function stopFireworks() {
+
+  fireworksRunning = false;
+
+  if (fireworksAnimationId) {
+    cancelAnimationFrame(fireworksAnimationId);
+    fireworksAnimationId = null;
+  }
+
+  particles = [];
+
+  fireworkCtx.clearRect(
+    0,
+    0,
+    window.innerWidth,
+    window.innerHeight
+  );
+
+  fireworkCanvas.classList.remove("active");
+}
+
+</script>
+
+</body>
+</html>
